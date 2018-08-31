@@ -1,4 +1,4 @@
-.PHONY: clean cppcheck
+.PHONY: clean cppcheck style
 
 CXX=g++
 
@@ -19,3 +19,6 @@ clean:
 
 cppcheck: $(TARGET)
 	cppcheck --enable=all --language=c++ *.cpp
+
+style:
+	astyle --style=gnu -s2 -n *.cpp *.h

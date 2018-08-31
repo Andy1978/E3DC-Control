@@ -14,4 +14,4 @@ int SocketSendData(int iSocket, const unsigned char * ucBuffer, int iLength);
 int SocketRecvData(int iSocket, unsigned char * ucBuffer, int iLength);
 
 
- #endif // __SOCKET_CONNECTION_H_
+#endif // __SOCKET_CONNECTION_H_
