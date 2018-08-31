@@ -1,11 +1,21 @@
+.PHONY: clean cppcheck
+
 CXX=g++
-ROOT_VALUE=E3DC-Control
 
-all: $(ROOT_VALUE)
+TARGETS= E3DC-Control
 
-$(ROOT_VALUE): clean
-	$(CXX) -O3 RscpExampleMain.cpp RscpProtocol.cpp AES.cpp SocketConnection.cpp -o $@
+CXXFLAGS=-Wall -Wextra -fsanitize=address
 
+all: $(TARGETS)
+
+E3DC-Control: RscpExampleMain.cpp RscpProtocol.o AES.o SocketConnection.o
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+%.o: %.cpp %.h
+	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 clean:
-	-rm $(ROOT_VALUE) $(VECTOR)
+	rm -f $(TARGETS) *.o
+
+cppcheck: $(TARGET)
+	cppcheck --enable=all --language=c++ *.cpp
